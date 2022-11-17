@@ -43,7 +43,7 @@ const socketIo = require('socket.io')(httpServer, {
 });
 connect(socketIo);
 
-httpServer.listen(process.env.PORT || 80, () =>
-  console.log('Http running on ', process.env.PORT || 80)
+httpServer.listen(process.env.PORT || 5001, () =>
+  console.log('Http running on ', process.env.PORT || 5001)
 );
 module.exports = app;
