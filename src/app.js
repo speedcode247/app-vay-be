@@ -18,7 +18,7 @@ global.__basedir = __dirname;
 
 const httpServer = http.createServer(app);
 db.connection();
-app.use(cors('*'));
+// app.use(cors('*'));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,9 +36,9 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 const socketIo = require('socket.io')(httpServer, {
-  cors: {
-    origin: '*',
-  },
+  // cors: {
+  //   origin: '*',
+  // },
   allowEIO3: true,
 });
 connect(socketIo);
