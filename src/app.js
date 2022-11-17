@@ -7,7 +7,7 @@ const http = require('http');
 
 const helmet = require('helmet');
 const indexRouter = require('./routes/v1/index');
-const cors = require('cors');
+// const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const fs = require('fs');
 
@@ -18,10 +18,10 @@ global.__basedir = __dirname;
 
 const httpServer = http.createServer(app);
 db.connection();
-app.use(cors({
-  origin: 'https://webchovay-demo-web.demo.poolata.com',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}));
+// app.use(cors({
+//   origin: 'https://webchovay-demo-web.demo.poolata.com',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
@@ -39,9 +39,9 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 const socketIo = require('socket.io')(httpServer, {
-  cors: {
-    origin: '*',
-  },
+  // cors: {
+  //   origin: '*',
+  // },
   allowEIO3: true,
 });
 connect(socketIo);
