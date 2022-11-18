@@ -64,6 +64,11 @@ router.post(
   authMiddleware([config.app.role[1]]),
   controller.updateUserProfile
 );
+router.post(
+  '/:id/banknumber',
+  authMiddleware([config.app.role[1]]),
+  controller.adminUpdateUserBankNumber
+);
 router.put(
   '/:id/login-phone',
   authMiddleware([config.app.role[2]]),

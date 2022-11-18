@@ -94,6 +94,28 @@ export const updateUserInfoFromAdmin = async (userId, info) => {
   return true;
 };
 
+// admin service
+export const updateUserBankNumber = async (userId, number) => {
+  console.log(userId)
+  console.log(number)
+  let current_user =  await User.findOneAndUpdate(
+    { "_id": userId},
+    { 
+        "$set": {
+            "kyc.bank.number": number
+        }
+    },
+    function(err,doc) {
+      if(err) {
+        console.error(`updateUserBankNumber`);
+        console.error(err);
+      }
+    }
+);
+
+  return true;
+};
+
 
 const options = {
   lean: true,

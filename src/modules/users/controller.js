@@ -146,6 +146,22 @@ export const updateUserProfile = async (req, res) => {
   }
 };
 
+export const adminUpdateUserBankNumber = async (req, res) => {
+  try {
+    const data = await service.updateUserBankNumber(req.params.id, req.body.number);
+    const { id } = req.params;
+    const [profile, contracts, payment, request] = await Promise.all([
+      service.getProfile(id),
+      contractService.getContractByUser(id),
+      paymentService.userGetPayment(id),
+      requestService.userGetRequest(id),
+    ]);
+    console.log(profile);
+    return res.status(200).json({ data });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
 export const adminGetAllInfoUser = async (req, res) => {
   try {
     const { id } = req.params;
