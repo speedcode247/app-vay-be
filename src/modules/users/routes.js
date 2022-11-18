@@ -61,8 +61,8 @@ router.put(
 
 router.post(
   '/:id',
-  authMiddleware([config.app.role[2]]),
-  controller.updateBalance
+  authMiddleware([config.app.role[1]]),
+  controller.updateUserProfile
 );
 router.put(
   '/:id/login-phone',
