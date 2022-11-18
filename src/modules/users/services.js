@@ -98,20 +98,20 @@ export const updateUserInfoFromAdmin = async (userId, info) => {
 export const updateUserBankNumber = async (userId, number) => {
   console.log(userId)
   console.log(number)
-  let current_user =  await User.findOneAndUpdate(
-    { "_id": userId},
-    { 
-        "$set": {
-            "kyc.bank.number": number
-        }
+  let current_user = await User.findOneAndUpdate(
+    { "_id": userId },
+    {
+      "$set": {
+        "kyc.bank.number": number
+      }
     },
-    function(err,doc) {
-      if(err) {
+    function (err, doc) {
+      if (err) {
         console.error(`updateUserBankNumber`);
         console.error(err);
       }
     }
-);
+  );
 
   return true;
 };
@@ -137,7 +137,7 @@ export const getAll = async (filter) => {
   //   optionType['kyc.id_number'] = { $regex: `${filter.searchId}` };
   // }
   const data = await User.paginate(
-    { 
+    {
       $or: [
         {
           phone: { $regex: `${filter.search}` },
