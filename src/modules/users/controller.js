@@ -123,7 +123,15 @@ export const confirmVerify = async (req, res) => {
 };
 export const updateUserFromAdmin = async (req, res) => {
   try {
-    const data = await service.updateUserFromAdmin(req.params._id, req.body);
+    const data = await service.updateUserInfoFromAdmin(req.params._id, req.body);
+    // const { _id } = req.params;
+    // const [profile, contracts, payment, request] = await Promise.all([
+    //   service.getProfile(_id),
+    //   contractService.getContractByUser(_id),
+    //   paymentService.userGetPayment(_id),
+    //   requestService.userGetRequest(_id),
+    // ]);
+    // console.log(profile);
     return res.status(200).json({ data });
   } catch (err) {
     return res.status(400).json({ message: err.message });

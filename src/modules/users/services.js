@@ -83,6 +83,18 @@ export const updateUserFromAdmin = async (userId, kyc_payload) => {
   return true;
 };
 
+// admin service
+export const updateUserInfoFromAdmin = async (userId, info) => {
+  let current_user = await User.findById(userId);
+  for (let i = 0; i < Object.keys(info).length; i++) {
+    const _key = Object.keys(info)[i];
+    current_user[_key] = info[_key]
+  }
+  current_user.save();
+  return true;
+};
+
+
 const options = {
   lean: true,
   limit: 10,
