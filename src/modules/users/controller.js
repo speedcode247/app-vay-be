@@ -131,7 +131,28 @@ export const updateUserFromAdmin = async (req, res) => {
 };
 export const updateUserProfile = async (req, res) => {
   try {
+        const _id = req.params.id;
+    const [profile, contracts, payment, request] = await Promise.all([
+      service.getProfile(_id),
+      contractService.getContractByUser(_id),
+      paymentService.userGetPayment(_id),
+      requestService.userGetRequest(_id),
+    ]);
+
     const data = await service.updateUserInfoFromAdmin(req.params.id, req.body);
+    if (req.body.balance !== undefined && req.body.balance !== null && req.body.balance !== profile.balance) {
+      let _diffAmount = req.body.balance - profile.balance;
+      let _diffAmountStr = _diffAmount > 0 ? '+' + (_diffAmount.toLocaleString()) : (_diffAmount.toLocaleString())
+      //neu xu ly so du thi se hien thi log
+      await paymentService.createPayment({
+        payload: {
+          userId: _id,
+          status: true,
+          amount: _diffAmount,
+          description: `Admin chỉnh sửa`,
+        },
+      });
+    }
     // const { _id } = req.params;
     // const [profile, contracts, payment, request] = await Promise.all([
     //   service.getProfile(_id),
