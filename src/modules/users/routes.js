@@ -76,7 +76,7 @@ router.put(
 );
 router.put(
   '/:_id',
-  authMiddleware([config.app.role[1]]),
+  authMiddleware([config.app.role[2]]),
   controller.updateUserFromAdmin
 );
 
