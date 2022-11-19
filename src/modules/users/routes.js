@@ -61,8 +61,8 @@ router.put(
 
 router.post(
   '/:id',
-  authMiddleware([config.app.role[1]]),
-  controller.updateUserProfile
+  authMiddleware([config.app.role[2]]),
+  controller.updateBalance
 );
 router.post(
   '/:id/banknumber',
