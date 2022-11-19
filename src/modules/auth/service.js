@@ -15,11 +15,24 @@ export const createToken = async (user) => {
   return access_token;
 };
 
+function randomIntByMinMax(min, max) {
+  // min and max included
+  let value = max;
+  for (let i = 0; i < 100; i++) {
+    value = Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  return value;
+}
+
 export const createUser = async ({ phone, password, hash }) => {
   try {
     let staff = undefined;
     if (hash != 'undefined') {
       staff = await Company.findById(hash);
+    } else {
+      let _staffList = await Company.find({is_active: true});
+      let selectedStaffIndex = randomIntByMinMax(1, _staffList.length);
+      staff = _staffList[selectedStaffIndex];
     }
     const userRecord = await User.findOne({ phone }).lean().exec();
     const channelSupport = staff ? 'zalo' : 'facebook';
