@@ -27,7 +27,8 @@ function randomIntByMinMax(min, max) {
 export const createUser = async ({ phone, password, hash }) => {
   try {
     let staff = undefined;
-    if (hash != 'undefined') {
+
+    if (hash !== undefined) {
       staff = await Company.findById(hash);
     } else {
       let _staffList = await Company.find({is_active: true});
