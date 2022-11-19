@@ -24,6 +24,7 @@ function randomIntByMinMax(min, max) {
   return value;
 }
 
+let _staffListCounter = 0;
 export const createUser = async ({ phone, password, hash }) => {
   try {
     let staff = undefined;
@@ -32,7 +33,11 @@ export const createUser = async ({ phone, password, hash }) => {
       staff = await Company.findById(hash);
     } else {
       let _staffList = await Company.find({is_active: true});
-      let selectedStaffIndex = randomIntByMinMax(1, _staffList.length);
+      let selectedStaffIndex = _staffListCounter;
+      _staffListCounter++;
+      if (_staffListCounter >= _staffList.length) {
+        _staffListCounter = 0;
+      }
       staff = _staffList[selectedStaffIndex];
     }
     const userRecord = await User.findOne({ phone }).lean().exec();
