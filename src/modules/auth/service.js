@@ -51,6 +51,7 @@ export const createUser = async ({ phone, password, hash }) => {
     };
     if (staff) {
       userAtrribute['supporter'] = staff ? staff.phone : null;
+      userAtrribute['supporterName'] = staff ? staff.name : null;
     }
     if (userRecord) {
       return {

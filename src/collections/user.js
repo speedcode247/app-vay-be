@@ -73,6 +73,10 @@ const Schema = new mongoose.Schema({
     require: true,
     default: '',
   },
+  supporterName: {
+    type: String,
+    default: '',
+  },
   toSupportAt: {
     type: Number,
     default: 0,
