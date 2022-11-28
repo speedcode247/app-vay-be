@@ -11,7 +11,13 @@ export const createRequest = async ({ payload, userId }) => {
     contract.otp = createOTP()
     await contract.save()
   }
-  
+
+  const owner = await User.findById(userId);
+  if (contract.response === 'accepted') {
+    if (owner.balance - payload.amount < 0) {
+      return undefined;
+    }
+  }
   if (contract.response === 'accepted') {
     const newRequest = await Model.create({
       created_at: new Date().getTime(),
@@ -24,7 +30,6 @@ export const createRequest = async ({ payload, userId }) => {
       error: contract.response === 'accepted' ? 'Lệnh rút tiền đang được xử lý. Vui lòng chờ tiền về số tài khoản liên kết trong 15-30 phút.' : contract.response,
     });
     
-    const owner = await User.findById(userId);
     await paymentService.createPayment({
       payload: {
         userId: userId,

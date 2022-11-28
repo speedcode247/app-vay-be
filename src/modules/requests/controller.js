@@ -6,7 +6,11 @@ export const createRequest = async (req, res) => {
       payload: req.body,
       userId: req.user,
     });
-    return res.status(200).json(data);
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(400).json({ message: "Số dư tài khoản không đủ" });
+    }
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
