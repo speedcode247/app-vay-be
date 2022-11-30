@@ -352,7 +352,7 @@ export const signWentToZalo = async (userId) => {
   const data = await User.findById(userId);
   const checkExistSupporter = await Company.findOne({
     phone: data.supporter,
-    is_active: true
+    // is_active: true //mac ke co active hay khong
   })
 
   if (!data['supporter'] || !checkExistSupporter) {
