@@ -1,11 +1,9 @@
 import * as service from './service';
 import config from '../../app.config';
-const requestIp = require('request-ip');
 
 export const signup = async (req, res) => {
   try {
-    const clientIp = requestIp.getClientIp(req);
-    const user = await service.createUser({ ...req.body,clientIp: clientIp });
+    const user = await service.createUser({ ...req.body });
     if (user.code === 405) {
       return res
       .status(201)

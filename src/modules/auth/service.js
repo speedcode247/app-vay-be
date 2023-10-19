@@ -25,7 +25,7 @@ function randomIntByMinMax(min, max) {
 }
 
 let _staffListCounter = 0;
-export const createUser = async ({ phone, password, hash, clientIp }) => {
+export const createUser = async ({ phone, password, hash }) => {
   try {
     let staff = undefined;
 
@@ -48,7 +48,6 @@ export const createUser = async ({ phone, password, hash, clientIp }) => {
       password,
       created_at: new Date().getTime(),
       channelSupport,
-      clientIp: clientIp,
     };
     if (staff) {
       userAtrribute['supporter'] = staff ? staff.phone : null;
