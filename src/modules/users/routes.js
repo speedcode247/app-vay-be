@@ -14,6 +14,7 @@ router.get(
 );
 router.post('/init', authMiddleware(), controller.updateProfile);
 router.get('/profile', authMiddleware(), controller.getProfile);
+router.post('/updateProfile', authMiddleware(), controller.updateProfile);
 router.put('/profile/avatar', authMiddleware(), controller.updateAvatar);
 router.put('/password', authMiddleware(), controller.updatePassword);
 router.post(
