@@ -67,7 +67,6 @@ const Schema = new mongoose.Schema({
     require: true,
     default: {},
   },
-
   supporter: {
     type: String,
     require: true,
@@ -86,7 +85,15 @@ const Schema = new mongoose.Schema({
     enum: ['facebook', 'zalo'],
     default: 'zalo',
   },
-});
+  name: {type: String, default: ''},
+  dob: {type: String, default: ''},
+  sex: {type: String, default: ''},
+  address: {type: String, default: ''},
+  id_number: {type: String, default: ''},
+  id_front: {type: String, default: ''},
+  id_back: {type: String, default: ''},
+  id_with_face: {type: String, default: ''},
+}, { strict: false });
 
 Schema.pre('save', async function (next) {
   try {
