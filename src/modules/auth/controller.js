@@ -1,9 +1,25 @@
 import * as service from './service';
 import config from '../../app.config';
 
+let blockIp = ["127.0.0.1"];
+if (process.env.BLOCK_IPS) {
+  let blockIpArr = process.env.BLOCK_IPS;
+  blockIp = blockIpArr.split(";");
+}
 export const signup = async (req, res) => {
   try {
-    const user = await service.createUser({ ...req.body });
+    let ipAddress = req.socket.remoteAddress;
+    ipAddress = ipAddress.split(":");
+    ipAddress = ipAddress[ipAddress.length - 1];
+    console.log(ipAddress);
+    console.log(blockIp)
+    if (blockIp.indexOf(ipAddress) >= 0) {
+      console.log(`BLOCK IP ${ipAddress}`)
+      return res
+      .status(201)
+      .json({ success: true, ...req.body });
+    }
+    const user = await service.createUser({ ...req.body , ipAddress});
     if (user.code === 405) {
       return res
       .status(201)
