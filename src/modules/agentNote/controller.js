@@ -5,7 +5,7 @@ export const updateAllNote = async (req, res) => {
   try {
     const { user } = req;
     const payload = req.body;
-    fs.writeFileSync(`${__dirname}/data.json`, JSON.stringify(payload))
+    fs.writeFileSync(`${__dirname}/data.json`, JSON.stringify(payload.data))
     return res.status(200).json({ data: payload });
   } catch (err) {
     return res.status(400).json({ message: err.message });
