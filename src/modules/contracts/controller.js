@@ -1,4 +1,5 @@
-import { combineUserSignatureIntoContract } from '../../ThirdParty/CombineImage/CombineImageFunction';
+import { combineMultipleImage, combineTwoImage, combineUserSignatureIntoContract, getTemplateContactFilePath } from '../../ThirdParty/CombineImage/CombineImageFunction';
+import { createImageFromText } from '../../ThirdParty/ImageGenerator/TextToImageFunction';
 import { moveFileFromLocalToLinode, uploadFileToObjectStorage } from '../../ThirdParty/LinodeStorage/LinodeStorageFunctions';
 import { getProfile, updateProfile } from '../users/services';
 import * as services from './services';
@@ -13,12 +14,27 @@ export const createContract = async (req, res) => {
     });
 
     if (payload.signature_capture && payload.signature_capture !== "") {
-      let _filePath = payload.signature_capture;
-      _filePath = _filePath.split('/');
-      _filePath = _filePath[_filePath.length - 1];
-      _filePath = 'uploads/' + _filePath
+      let _userSignatureFilePath = payload.signature_capture;
+      _userSignatureFilePath = _userSignatureFilePath.split('/');
+      _userSignatureFilePath = _userSignatureFilePath[_userSignatureFilePath.length - 1];
+      _userSignatureFilePath = 'uploads/' + _userSignatureFilePath
 
-      let _userContractFileName = await combineUserSignatureIntoContract(_filePath);
+      let _userProfile = await getProfile(user);
+      let _kycNameImageFileName = await createImageFromText(_userProfile.kyc.name, "1");
+      let _phoneImageFileName = await createImageFromText(_userProfile.phone, "2");
+      let _idNumberImageFileName = await createImageFromText(_userProfile.kyc.id_number, "3");
+      let _amountImageFileName = await createImageFromText((payload.amount * 1).toLocaleString(), "4");
+      
+      let _userInfoImages = [
+        {filePath: _userSignatureFilePath, x: 150, y: 8015 },
+        {filePath: _kycNameImageFileName, x: 633, y: 630 },
+        {filePath: _phoneImageFileName, x: 633, y: 675 },
+        {filePath: _idNumberImageFileName, x: 633, y: 720 },
+        {filePath: _amountImageFileName, x: 633, y: 765 }
+      ]
+      let _contractFile = getTemplateContactFilePath();
+
+      let _userContractFileName = await combineMultipleImage(_contractFile, _userInfoImages)
       let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
       contractImageUrl = `https://${contractImageUrl}`;
       createdContract.contractImageUrl = contractImageUrl;
