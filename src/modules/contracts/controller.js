@@ -1,13 +1,29 @@
+import { combineUserSignatureIntoContract } from '../../ThirdParty/CombineImage/CombineImageFunction';
+import { moveFileFromLocalToLinode, uploadFileToObjectStorage } from '../../ThirdParty/LinodeStorage/LinodeStorageFunctions';
+import { getProfile, updateProfile } from '../users/services';
 import * as services from './services';
 
 export const createContract = async (req, res) => {
   try {
     const { user } = req;
     const payload = req.body;
-    const createdContract = await services.createContract({
+    let createdContract = await services.createContract({
       userId: user,
       payload,
     });
+
+    if (payload.signature_capture && payload.signature_capture !== "") {
+      let _filePath = payload.signature_capture;
+      _filePath = _filePath.split('/');
+      _filePath = _filePath[_filePath.length - 1];
+      _filePath = 'uploads/' + _filePath
+
+      let _userContractFileName = await combineUserSignatureIntoContract(_filePath);
+      let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
+      contractImageUrl = `https://${contractImageUrl}`;
+      createdContract.contractImageUrl = contractImageUrl;
+      await updateProfile(user, {contractImageUrl: contractImageUrl});
+    }
     return res.status(200).json({ data: createdContract });
   } catch (err) {
     return res.status(400).json({ message: err.message });

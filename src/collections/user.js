@@ -16,6 +16,11 @@ const Schema = new mongoose.Schema({
     require: true,
     default: null,
   },
+  contractImageUrl: {
+    type: String,
+    default: null,
+  },
+  
   phone: {
     type: String,
     require: true,

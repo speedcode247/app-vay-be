@@ -1,4 +1,4 @@
-FROM node:14.20
+FROM node:14.21
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

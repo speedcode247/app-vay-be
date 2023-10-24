@@ -1,12 +1,12 @@
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+// const cloudinary = require('cloudinary').v2;
+// const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 
-cloudinary.config({
-  cloud_name: 'credit24h',
-  api_key: '547479774471299',
-  api_secret: '4v70yh-nVSolLYgPFel4G07VS9g',
-});
+// cloudinary.config({
+//   cloud_name: 'credit24h',
+//   api_key: '547479774471299',
+//   api_secret: '4v70yh-nVSolLYgPFel4G07VS9g',
+// });
 
 // const storage = new CloudinaryStorage({
 //   cloudinary,
@@ -21,6 +21,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads')
   },
   filename: (req, file, cb) => {
+    console.log(file)
     cb(null, file.fieldname + '-' + Date.now() + '.jpg')
   }
 });
