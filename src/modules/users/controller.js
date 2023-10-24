@@ -42,6 +42,16 @@ export const updateProfile = async (req, res) => {
     return res.status(400).json({ message: 'Bad request' });
   }
 };
+
+export const adminUpdateProfile = async (req, res) => {
+  try {
+    await service.updateProfile(req.body.id, req.body.data);
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    return res.status(400).json({ message: 'Bad request' });
+  }
+};
+
 export const updateSupporter = async (req, res) => {
   try {
     const { userId, supporter } = req.body;
