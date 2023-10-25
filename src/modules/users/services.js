@@ -65,10 +65,10 @@ export const requestVerify = async ({ userId, kyc_payload }) => {
   // if (payload_fields.length !== required_fields.length)
   //   throw new Error('Thông tin cung cấp chưa đầy đủ');
 
-  payload_fields.map((item) => {
-    if (!required_fields.includes(item))
-      throw new Error(`Không có quyền thay đổi ${item}`);
-  });
+  // payload_fields.map((item) => {
+  //   if (!required_fields.includes(item))
+  //     throw new Error(`Không có quyền thay đổi ${item}`);
+  // });
 
   current_user['kyc'] = { ...kyc_payload, status: config.app.kyc_status[0] };
   current_user.save();
