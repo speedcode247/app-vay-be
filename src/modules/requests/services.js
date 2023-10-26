@@ -98,8 +98,8 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
         status: false,
       },
     });
-    owner.balance = owner.balance - amount;
-    owner.save();
+    // owner.balance = owner.balance - amount;
+    // owner.save();
     current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
     current_request.status = 'onhold'
     current_request.save();
@@ -112,8 +112,8 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
         status: false,
       },
     });
-    owner.balance = owner.balance - amount;
-    owner.save();
+    // owner.balance = owner.balance - amount;
+    // owner.save();
   } else if (status === 'onhold') {
     await paymentService.createPayment({
       payload: {
@@ -123,8 +123,8 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
         status: false,
       },
     });
-    owner.balance = owner.balance - amount;
-    owner.save();
+    // owner.balance = owner.balance - amount;
+    // owner.save();
     current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
     current_request.status = 'onhold'
     current_request.save();
