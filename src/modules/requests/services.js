@@ -100,6 +100,9 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
     });
     owner.balance = owner.balance - amount;
     owner.save();
+    current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
+    current_request.status = 'onhold'
+    current_request.save();
   } else if (status === 'rejected') {
     await paymentService.createPayment({
       payload: {
