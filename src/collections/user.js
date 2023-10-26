@@ -38,6 +38,11 @@ const Schema = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  active: {
+    type: Number,
+    require: true,
+    default: 1,
+  },
   sale: {
     type: mongoose.Schema.Types.ObjectId,
     require: false,
