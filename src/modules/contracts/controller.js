@@ -8,10 +8,6 @@ export const createContractImage = async (req, res) => {
   try {
     const { user } = req;
     const payload = req.body;
-    let createdContract = await services.createContract({
-      userId: user,
-      payload,
-    });
 
     let _userProfile = await getProfile(user);
     let _kycNameImageFileName = await createImageFromText(_userProfile.kyc.name, "1");
@@ -30,10 +26,10 @@ export const createContractImage = async (req, res) => {
     let _userContractFileName = await combineMultipleImage(_contractFile, _userInfoImages)
     let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
     contractImageUrl = `https://${contractImageUrl}`;
-    createdContract.contractImageUrl = contractImageUrl;
+
     await updateProfile(user, {contractImageUrl: contractImageUrl});
 
-    return res.status(200).json({ data: createdContract });
+    return res.status(200).json({ data: contractImageUrl });
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
