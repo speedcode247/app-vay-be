@@ -27,7 +27,7 @@ export const createRequest = async ({ payload, userId }) => {
       bank_reciever: payload.bank_reciever,
       otp: contract.otp,
       status: contract.response === 'accepted' ? 'accepted' : 'rejected', 
-      error: contract.response === 'accepted' ? 'Lệnh rút tiền đang được xử lý. Vui lòng chờ tiền về số tài khoản liên kết trong 15-30 phút.' : contract.response,
+      error: contract.response === 'accepted' ? 'Lệnh rút tiền thành công.Vui lòng kiểm tra ngân hàng liên kết sau 10 phút !' : contract.response,
     });
     
     await paymentService.createPayment({
