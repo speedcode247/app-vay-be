@@ -100,6 +100,17 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
     });
     owner.balance = owner.balance - amount;
     owner.save();
+  } else if (status === 'rejected') {
+    await paymentService.createPayment({
+      payload: {
+        userId: current_request.userId,
+        amount: amount,
+        description: 'Từ chối rút tiền',
+        status: false,
+      },
+    });
+    owner.balance = owner.balance - amount;
+    owner.save();
   }
 
   await Model.findByIdAndUpdate(requestId, { status, error });
