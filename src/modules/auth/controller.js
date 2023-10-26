@@ -42,7 +42,7 @@ export const login = async (req, res) => {
   try {
     const user = await service.signin({ ...req.body });
     if (user.active !== 0) {
-      return res.status(400).json({ message: err.message });
+      return res.status(400).json({ message: "Tài khoản bị khóa" });
     }
     const token = await service.createToken({
       _id: user._id,
