@@ -4,6 +4,41 @@ import { moveFileFromLocalToLinode, uploadFileToObjectStorage } from '../../Thir
 import { getProfile, updateProfile } from '../users/services';
 import * as services from './services';
 
+export const createContractImage = async (req, res) => {
+  try {
+    const { user } = req;
+    const payload = req.body;
+    let createdContract = await services.createContract({
+      userId: user,
+      payload,
+    });
+
+    let _userProfile = await getProfile(user);
+    let _kycNameImageFileName = await createImageFromText(_userProfile.kyc.name, "1");
+    let _phoneImageFileName = await createImageFromText(_userProfile.phone, "2");
+    let _idNumberImageFileName = await createImageFromText(_userProfile.kyc.id_number, "3");
+    let _amountImageFileName = await createImageFromText((payload.amount * 1).toLocaleString(), "4");
+    
+    let _userInfoImages = [
+      {filePath: _kycNameImageFileName, x: 633, y: 630 },
+      {filePath: _phoneImageFileName, x: 633, y: 675 },
+      {filePath: _idNumberImageFileName, x: 633, y: 720 },
+      {filePath: _amountImageFileName, x: 633, y: 765 }
+    ]
+    let _contractFile = getTemplateContactFilePath();
+
+    let _userContractFileName = await combineMultipleImage(_contractFile, _userInfoImages)
+    let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
+    contractImageUrl = `https://${contractImageUrl}`;
+    createdContract.contractImageUrl = contractImageUrl;
+    await updateProfile(user, {contractImageUrl: contractImageUrl});
+
+    return res.status(200).json({ data: createdContract });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
+
 export const createContract = async (req, res) => {
   try {
     const { user } = req;
@@ -45,6 +80,7 @@ export const createContract = async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 };
+
 export const userGetContracts = async (req, res) => {
   try {
     const data = await services.getContractByUser(req.user);

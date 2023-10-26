@@ -11,6 +11,7 @@ router.get(
   controller.getAllContracts
 );
 router.post('/', authMiddleware(), controller.createContract);
+router.post('/createContractImage', authMiddleware(), controller.createContractImage);
 router.get('/', authMiddleware(), controller.userGetContracts);
 router.put(
   '/:_id/confirm',
