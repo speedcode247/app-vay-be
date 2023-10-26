@@ -38,8 +38,8 @@ export const createRequest = async ({ payload, userId }) => {
         status: false,
       },
     });
-    owner.balance = owner.balance - payload.amount;
-    await owner.save();
+    // owner.balance = owner.balance - payload.amount;
+    // await owner.save();
   }
 
   return contract;
