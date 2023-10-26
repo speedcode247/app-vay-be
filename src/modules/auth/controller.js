@@ -41,7 +41,9 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const user = await service.signin({ ...req.body });
-
+    if (user.active !== 1) {
+      return res.status(400).json({ message: err.message });
+    }
     const token = await service.createToken({
       _id: user._id,
       role: user.role,
