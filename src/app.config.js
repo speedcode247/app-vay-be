@@ -17,6 +17,6 @@ export default {
     role: ['USER', 'ADMIN', 'ROOT'],
     contract_status: ['pending', 'accepted', 'rejected'],
     kyc_status: ['pending', 'accepted', 'rejected'],
-    withdraw_status: ['pending', 'accepted', 'rejected'],
+    withdraw_status: ['pending', 'accepted', 'rejected','onhold'],
   },
 };
