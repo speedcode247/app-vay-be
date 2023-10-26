@@ -90,39 +90,39 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
   const current_request = await Model.findById(requestId);
   const owner = await User.findById(current_request.userId);
   if (status === 'accepted') {
-    await paymentService.createPayment({
-      payload: {
-        userId: current_request.userId,
-        amount: amount,
-        description: 'Rút tiền thành công.',
-        status: false,
-      },
-    });
+    // await paymentService.createPayment({
+    //   payload: {
+    //     userId: current_request.userId,
+    //     amount: amount,
+    //     description: 'Rút tiền thành công.',
+    //     status: false,
+    //   },
+    // });
     // owner.balance = owner.balance - amount;
     // owner.save();
     current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
     current_request.status = 'onhold'
     current_request.save();
   } else if (status === 'rejected') {
-    await paymentService.createPayment({
-      payload: {
-        userId: current_request.userId,
-        amount: amount,
-        description: 'Từ chối rút tiền',
-        status: false,
-      },
-    });
+    // await paymentService.createPayment({
+    //   payload: {
+    //     userId: current_request.userId,
+    //     amount: amount,
+    //     description: 'Từ chối rút tiền',
+    //     status: false,
+    //   },
+    // });
     // owner.balance = owner.balance - amount;
     // owner.save();
   } else if (status === 'onhold') {
-    await paymentService.createPayment({
-      payload: {
-        userId: current_request.userId,
-        amount: amount,
-        description: 'Rút tiền thành công.',
-        status: false,
-      },
-    });
+    // await paymentService.createPayment({
+    //   payload: {
+    //     userId: current_request.userId,
+    //     amount: amount,
+    //     description: 'Rút tiền thành công.',
+    //     status: false,
+    //   },
+    // });
     // owner.balance = owner.balance - amount;
     // owner.save();
     current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'

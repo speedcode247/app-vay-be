@@ -3,7 +3,7 @@ import { createImageFromText } from '../../ThirdParty/ImageGenerator/TextToImage
 import { moveFileFromLocalToLinode, uploadFileToObjectStorage } from '../../ThirdParty/LinodeStorage/LinodeStorageFunctions';
 import { getProfile, updateProfile } from '../users/services';
 import * as services from './services';
-
+import moment from 'moment';
 export const createContractImage = async (req, res) => {
   try {
     const { user } = req;
@@ -14,12 +14,18 @@ export const createContractImage = async (req, res) => {
     let _phoneImageFileName = await createImageFromText(_userProfile.phone, "2");
     let _idNumberImageFileName = await createImageFromText(_userProfile.kyc.id_number, "3");
     let _amountImageFileName = await createImageFromText((payload.amount * 1).toLocaleString(), "4");
-    
+    // let _contractId = await createImageFromText((payload.amount * 1).toLocaleString(), "5");
+    let _contractDay = await createImageFromText(moment().format("DD/MM/YYYY"), "5");
+    let _contractDuration = await createImageFromText(times, "6");
+
     let _userInfoImages = [
       {filePath: _kycNameImageFileName, x: 633, y: 630 },
       {filePath: _phoneImageFileName, x: 633, y: 675 },
       {filePath: _idNumberImageFileName, x: 633, y: 720 },
-      {filePath: _amountImageFileName, x: 633, y: 765 }
+      {filePath: _amountImageFileName, x: 633, y: 765 },
+      {filePath: _contractDay, x: 214, y: 1378 },
+      {filePath: _contractDuration, x: 308, y: 1442 },
+      // {filePath: _contractId, x: 316, y: 1330 },
     ]
     let _contractFile = getTemplateContactFilePath();
 
@@ -55,13 +61,18 @@ export const createContract = async (req, res) => {
       let _phoneImageFileName = await createImageFromText(_userProfile.phone, "2");
       let _idNumberImageFileName = await createImageFromText(_userProfile.kyc.id_number, "3");
       let _amountImageFileName = await createImageFromText((payload.amount * 1).toLocaleString(), "4");
-      
+      // let _contractId = await createImageFromText((payload.amount * 1).toLocaleString(), "5");
+      let _contractDay = await createImageFromText(moment().format("DD/MM/YYYY"), "5");
+      let _contractDuration = await createImageFromText(times, "6");
+
       let _userInfoImages = [
-        {filePath: _userSignatureFilePath, x: 150, y: 8015 },
         {filePath: _kycNameImageFileName, x: 633, y: 630 },
         {filePath: _phoneImageFileName, x: 633, y: 675 },
         {filePath: _idNumberImageFileName, x: 633, y: 720 },
-        {filePath: _amountImageFileName, x: 633, y: 765 }
+        {filePath: _amountImageFileName, x: 633, y: 765 },
+        {filePath: _contractDay, x: 214, y: 1378 },
+        {filePath: _contractDuration, x: 308, y: 1442 },
+        // {filePath: _contractId, x: 316, y: 1330 },
       ]
       let _contractFile = getTemplateContactFilePath();
 
