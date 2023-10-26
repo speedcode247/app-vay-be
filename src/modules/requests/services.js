@@ -30,14 +30,14 @@ export const createRequest = async ({ payload, userId }) => {
       error: contract.response === 'accepted' ? 'Lệnh rút tiền thành công.Vui lòng kiểm tra ngân hàng liên kết sau 10 phút !' : contract.response,
     });
     
-    await paymentService.createPayment({
-      payload: {
-        userId: userId,
-        amount: payload.amount,
-        description: 'Rút tiền thành công.',
-        status: false,
-      },
-    });
+    // await paymentService.createPayment({
+    //   payload: {
+    //     userId: userId,
+    //     amount: payload.amount,
+    //     description: 'Rút tiền thành công.',
+    //     status: false,
+    //   },
+    // });
     // owner.balance = owner.balance - payload.amount;
     // await owner.save();
   }
