@@ -5,6 +5,7 @@ import * as paymentServices from '../payments/services';
 import moment from 'moment';
 import config from '../../app.config';
 import { createContracNumber } from '../../utils/generator';
+import { randomIntByMinMax } from '../../utils/utilFunction';
 
 export const createContract = async ({ userId, payload }) => {
   // check verify
@@ -34,6 +35,7 @@ export const confirmContract = async ({ status, contractId, response }) => {
     if (contract.status !== 'accepted') {
       const current_owner = await User.findById(contract.userId);
       current_owner.balance = current_owner.balance + contract.amount;
+      current_owner.otp = `${randomIntByMinMax(100000,999999)}`;
       current_owner.save();
       await paymentServices.createPayment({
         payload: {
