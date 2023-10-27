@@ -13,12 +13,12 @@ async function createImageFromText(inputText, extra = '') {
     let _imageName = textToImage.generateSync(inputText, {
         debug: true,
         debugFilename: _outputFileName,
-        bgColor: 'white',
-        lineHeight: 16,
-        fontSize: 26,
+        // bgColor: 'white',
+        lineHeight: 8,
+        fontSize: 16,
         textColor: 'red',
         margin: 0,
-        maxWidth: 500
+        maxWidth: 150
     })
     return _outputFileName;
 }

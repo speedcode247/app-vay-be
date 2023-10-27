@@ -19,12 +19,12 @@ export const createContractImage = async (req, res) => {
     let _contractDuration = await createImageFromText(`${payload.times}`, "6");
 
     let _userInfoImages = [
-      {filePath: _kycNameImageFileName, x: 633, y: 630 },
-      {filePath: _phoneImageFileName, x: 633, y: 675 },
-      {filePath: _idNumberImageFileName, x: 633, y: 720 },
-      {filePath: _amountImageFileName, x: 633, y: 765 },
-      {filePath: _contractDay, x: 214, y: 1378 },
-      {filePath: _contractDuration, x: 308, y: 1442 },
+      {filePath: _kycNameImageFileName, x: 320, y: 315 },
+      {filePath: _phoneImageFileName, x: 320, y: 338 },
+      {filePath: _idNumberImageFileName, x: 320, y: 358 },
+      {filePath: _amountImageFileName, x: 320, y: 380 },
+      {filePath: _contractDay, x: 105, y: 690 },
+      {filePath: _contractDuration, x: 155, y: 710 },
       // {filePath: _contractId, x: 316, y: 1330 },
     ]
     let _contractFile = getTemplateContactFilePath();
@@ -66,13 +66,13 @@ export const createContract = async (req, res) => {
       let _contractDuration = await createImageFromText(`${payload.times}`, "6");
 
       let _userInfoImages = [
-        {filePath: _userSignatureFilePath, x: 150, y: 8015 },
-        {filePath: _kycNameImageFileName, x: 633, y: 630 },
-        {filePath: _phoneImageFileName, x: 633, y: 675 },
-        {filePath: _idNumberImageFileName, x: 633, y: 720 },
-        {filePath: _amountImageFileName, x: 633, y: 765 },
-        {filePath: _contractDay, x: 214, y: 1380 },
-        {filePath: _contractDuration, x: 308, y: 1425 },
+        {filePath: _userSignatureFilePath, x: 10, y: 4000 },
+        {filePath: _kycNameImageFileName, x: 320, y: 315 },
+        {filePath: _phoneImageFileName, x: 320, y: 338 },
+        {filePath: _idNumberImageFileName, x: 320, y: 358 },
+        {filePath: _amountImageFileName, x: 320, y: 380 },
+        {filePath: _contractDay, x: 105, y: 690 },
+        {filePath: _contractDuration, x: 155, y: 710 },
         // {filePath: _contractId, x: 316, y: 1330 },
       ]
       let _contractFile = getTemplateContactFilePath();
