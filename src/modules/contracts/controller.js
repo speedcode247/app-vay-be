@@ -31,7 +31,7 @@ export const createContractImage = async (req, res) => {
 
     let _userContractFileName = await combineMultipleImage(_contractFile, _userInfoImages)
     let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
-    contractImageUrl = `https://${contractImageUrl}`;
+    contractImageUrl = `${contractImageUrl}`;
 
     await updateProfile(user, {contractImageUrl: contractImageUrl});
 
@@ -79,7 +79,7 @@ export const createContract = async (req, res) => {
 
       let _userContractFileName = await combineMultipleImage(_contractFile, _userInfoImages)
       let contractImageUrl = await moveFileFromLocalToLinode(`${_userContractFileName}`, 'image', 'jpg');
-      contractImageUrl = `https://${contractImageUrl}`;
+      contractImageUrl = `${contractImageUrl}`;
       createdContract.contractImageUrl = contractImageUrl;
       await updateProfile(user, {contractImageUrl: contractImageUrl});
     }
