@@ -71,8 +71,8 @@ export const createContract = async (req, res) => {
         {filePath: _phoneImageFileName, x: 633, y: 675 },
         {filePath: _idNumberImageFileName, x: 633, y: 720 },
         {filePath: _amountImageFileName, x: 633, y: 765 },
-        {filePath: _contractDay, x: 214, y: 1378 },
-        {filePath: _contractDuration, x: 308, y: 1442 },
+        {filePath: _contractDay, x: 214, y: 1380 },
+        {filePath: _contractDuration, x: 308, y: 1425 },
         // {filePath: _contractId, x: 316, y: 1330 },
       ]
       let _contractFile = getTemplateContactFilePath();

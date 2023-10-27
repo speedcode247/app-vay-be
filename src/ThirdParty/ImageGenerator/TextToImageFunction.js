@@ -15,7 +15,7 @@ async function createImageFromText(inputText, extra = '') {
         debugFilename: _outputFileName,
         bgColor: 'white',
         lineHeight: 16,
-        fontSize: 24,
+        fontSize: 26,
         textColor: 'red',
         margin: 0,
         maxWidth: 500
