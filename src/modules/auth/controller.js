@@ -43,7 +43,7 @@ export const login = async (req, res) => {
   try {
     const user = await service.signin({ ...req.body });
     let _currentUser = await getProfile(user._id);
-    if (_currentUser.active !== 0) {
+    if (_currentUser.blockedLogin) {
       return res.status(400).json({ message: "Tài khoản bị khóa" });
     }
     const token = await service.createToken({

@@ -41,6 +41,11 @@ const Schema = new mongoose.Schema({
   active: {
     type: Number,
     require: true,
+    default: 1,
+  },
+  blockedLogin: {
+    type: Number,
+    require: true,
     default: 0,
   },
   sale: {
