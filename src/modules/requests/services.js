@@ -140,11 +140,11 @@ export const updateRequest = async ({ requestId, payload }) => {
 };
 
 export const userGetRequest = async (userId) => {
-  const requests = await Model.find({ userId }).sort({ created_at: 1 });
+  const requests = await Model.find({ userId }).sort({ created_at: -1 });
   return requests;
 };
 
 export const getAllRequest = async () => {
-  const requests = await Model.find().populate('userId').populate('contractId');
+  const requests = await Model.find().populate('userId').populate('contractId').sort({ created_at: -1 });
   return requests;
 };
