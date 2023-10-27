@@ -16,7 +16,7 @@ export const createContractImage = async (req, res) => {
     let _amountImageFileName = await createImageFromText((payload.amount * 1).toLocaleString(), "4");
     // let _contractId = await createImageFromText((payload.amount * 1).toLocaleString(), "5");
     let _contractDay = await createImageFromText(moment().format("DD/MM/YYYY"), "5");
-    let _contractDuration = await createImageFromText(times, "6");
+    let _contractDuration = await createImageFromText(payload.times, "6");
 
     let _userInfoImages = [
       {filePath: _kycNameImageFileName, x: 633, y: 630 },
