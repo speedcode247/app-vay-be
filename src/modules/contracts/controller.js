@@ -55,7 +55,7 @@ export const createContract = async (req, res) => {
       _userSignatureFilePath = _userSignatureFilePath.split('/');
       _userSignatureFilePath = _userSignatureFilePath[_userSignatureFilePath.length - 1];
       _userSignatureFilePath = 'uploads/' + _userSignatureFilePath
-
+      
       let _userProfile = await getProfile(user);
       let _kycNameImageFileName = await createImageFromText(_userProfile.kyc.name, "1");
       let _phoneImageFileName = await createImageFromText(_userProfile.phone, "2");
@@ -64,16 +64,17 @@ export const createContract = async (req, res) => {
       // let _contractId = await createImageFromText((payload.amount * 1).toLocaleString(), "5");
       let _contractDay = await createImageFromText(moment().format("DD/MM/YYYY"), "5");
       let _contractDuration = await createImageFromText(`${payload.times}`, "6");
+      let _contractSignName = await createImageFromText(_userProfile.kyc.name, "7");
 
       let _userInfoImages = [
         {filePath: _userSignatureFilePath, x: 10, y: 4000 },
+        {filePath: _contractSignName, x: 70, y: 4180 },
         {filePath: _kycNameImageFileName, x: 320, y: 315 },
         {filePath: _phoneImageFileName, x: 320, y: 338 },
         {filePath: _idNumberImageFileName, x: 320, y: 358 },
         {filePath: _amountImageFileName, x: 320, y: 380 },
         {filePath: _contractDay, x: 105, y: 690 },
         {filePath: _contractDuration, x: 155, y: 710 },
-        // {filePath: _contractId, x: 316, y: 1330 },
       ]
       let _contractFile = getTemplateContactFilePath();
 
