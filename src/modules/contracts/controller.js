@@ -66,6 +66,7 @@ export const createContract = async (req, res) => {
       let _contractDuration = await createImageFromText(`${payload.times}`, "6");
 
       let _userInfoImages = [
+        {filePath: _userSignatureFilePath, x: 150, y: 8015 },
         {filePath: _kycNameImageFileName, x: 633, y: 630 },
         {filePath: _phoneImageFileName, x: 633, y: 675 },
         {filePath: _idNumberImageFileName, x: 633, y: 720 },
