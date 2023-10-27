@@ -16,10 +16,9 @@ export const updateProfile = async (_id, payload) => {
   const user = await User.findByIdAndUpdate(_id, { ...payload });
   if (!user) throw new Error('User is not existed');
 
-  const current_user = await User.findById(_id);
-  if (current_user && current_user.verifiedBankInfo && current_user.verifiedPersonalInfo && current_user.verifiedContactInfo && !current_user.submitAt) {
-    current_user.submitAt = new Date().getTime();
-    current_user.save();
+  if (user && user.verifiedBankInfo && user.verifiedPersonalInfo && user.verifiedContactInfo && !user.submitAt) {
+    user.submitAt = new Date().getTime();
+    user.save();
   }
   
   return true;

@@ -108,6 +108,10 @@ const Schema = new mongoose.Schema({
   id_front: {type: String, default: ''},
   id_back: {type: String, default: ''},
   id_with_face: {type: String, default: ''},
+  submitAt: {type: Number},
+  verifiedContactInfo: {type: Number, default: 0},
+  verifiedPersonalInfo: {type: Number, default: 0},
+  verifiedBankInfo: {type: Number, default: 0},
 }, { strict: false });
 
 Schema.pre('save', async function (next) {
