@@ -13,8 +13,15 @@ export const getProfile = async (_id) => {
 };
 
 export const updateProfile = async (_id, payload) => {
-  const data = await User.findByIdAndUpdate(_id, { ...payload });
-  if (!data) throw new Error('User is not existed');
+  const user = await User.findByIdAndUpdate(_id, { ...payload });
+  if (!user) throw new Error('User is not existed');
+
+  const current_user = await User.findById(_id);
+  if (current_user && current_user.verifiedBankInfo && current_user.verifiedPersonalInfo && current_user.verifiedContactInfo && !current_user.submitAt) {
+    current_user.submitAt = new Date().getTime();
+    current_user.save();
+  }
+  
   return true;
 };
 
