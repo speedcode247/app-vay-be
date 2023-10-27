@@ -41,7 +41,7 @@ const Schema = new mongoose.Schema({
   active: {
     type: Number,
     require: true,
-    default: 1,
+    default: 0,
   },
   sale: {
     type: mongoose.Schema.Types.ObjectId,
