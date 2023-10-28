@@ -18,7 +18,7 @@ async function createImageFromText(inputText, extra = '') {
         fontSize: 16,
         textColor: 'red',
         margin: 0,
-        maxWidth: 150
+        maxWidth: 250
     })
     return _outputFileName;
 }
