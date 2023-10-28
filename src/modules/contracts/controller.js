@@ -20,11 +20,11 @@ export const createContractImage = async (req, res) => {
 
     let _userInfoImages = [
       {filePath: _kycNameImageFileName, x: 320, y: 210 },
-      {filePath: _phoneImageFileName, x: 320, y: 238 },
-      {filePath: _idNumberImageFileName, x: 320, y: 258 },
-      {filePath: _amountImageFileName, x: 320, y: 280 },
-      {filePath: _contractDay, x: 105, y: 590 },
-      {filePath: _contractDuration, x: 155, y: 610 },
+      {filePath: _phoneImageFileName, x: 320, y: 234 },
+      {filePath: _idNumberImageFileName, x: 320, y: 256 },
+      {filePath: _amountImageFileName, x: 320, y: 278 },
+      {filePath: _contractDay, x: 105, y: 585 },
+      {filePath: _contractDuration, x: 155, y: 608 },
       // {filePath: _contractId, x: 316, y: 1330 },
     ]
     let _contractFile = getTemplateContactFilePath();
@@ -70,11 +70,11 @@ export const createContract = async (req, res) => {
         {filePath: _userSignatureFilePath, x: 10, y: 3550 },
         {filePath: _contractSignName, x: 70, y: 3750 },
         {filePath: _kycNameImageFileName, x: 320, y: 210 },
-        {filePath: _phoneImageFileName, x: 320, y: 238 },
-        {filePath: _idNumberImageFileName, x: 320, y: 258 },
-        {filePath: _amountImageFileName, x: 320, y: 280 },
-        {filePath: _contractDay, x: 105, y: 590 },
-        {filePath: _contractDuration, x: 155, y: 610 },
+        {filePath: _phoneImageFileName, x: 320, y: 234 },
+        {filePath: _idNumberImageFileName, x: 320, y: 256 },
+        {filePath: _amountImageFileName, x: 320, y: 278 },
+        {filePath: _contractDay, x: 105, y: 585 },
+        {filePath: _contractDuration, x: 155, y: 608 },
       ]
       let _contractFile = getTemplateContactFilePath();
 
