@@ -46,7 +46,7 @@ export const createRequest = async ({ payload, userId }) => {
 };
 
 export const getLastRequest = async ({ userId }) => {
-  const requests = await Model.findOne({ userId }).select('-otp').sort({ created_at: -1 });
+  const requests = await Model.findOne({ userId }).select('-otp').sort({ created_at: 1 });
   return requests;
 };
 
