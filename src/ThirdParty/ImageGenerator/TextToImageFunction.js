@@ -14,11 +14,11 @@ async function createImageFromText(inputText, extra = '') {
         debug: true,
         debugFilename: _outputFileName,
         // bgColor: 'white',
-        lineHeight: 8,
+        lineHeight: 10,
         fontSize: 16,
         textColor: 'red',
         margin: 0,
-        maxWidth: 150
+        maxWidth: 250
     })
     return _outputFileName;
 }
