@@ -14,7 +14,7 @@ export default {
   secret_key: process.env.SECRET_KEY,
   time_life_token: '100h',
   app: {
-    role: ['USER', 'ADMIN', 'ROOT'],
+    role: ['USER', 'ADMIN', 'ROOT', 'STAFF'],
     contract_status: ['pending', 'accepted', 'rejected'],
     kyc_status: ['pending', 'accepted', 'rejected'],
     withdraw_status: ['pending', 'accepted', 'rejected','onhold'],

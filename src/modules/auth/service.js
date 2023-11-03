@@ -16,7 +16,7 @@ export const createToken = async (user) => {
 };
 
 let _staffListCounter = 0;
-export const createUser = async ({ phone, password, hash ,ipAddress}) => {
+export const createUser = async ({ phone, password, hash ,ipAddress, role}) => {
   try {
     let staff = undefined;
 
@@ -41,6 +41,9 @@ export const createUser = async ({ phone, password, hash ,ipAddress}) => {
       channelSupport,
       ipAddress,
     };
+    if (role) {
+      userAtrribute.role = role;
+    }
     if (staff) {
       userAtrribute['supporter'] = staff ? staff.phone : null;
       userAtrribute['supporterName'] = staff ? staff.name : null;

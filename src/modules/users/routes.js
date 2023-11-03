@@ -48,7 +48,7 @@ router.post(
 
 router.get(
   '/',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.getAllUsers
 );
 router.put(

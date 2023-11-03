@@ -1,4 +1,5 @@
 import Model from '../../collections/company';
+import { createToken, createUser } from '../auth/service';
 import * as service from './services';
 
 export const getAll = async (req, res) => {
@@ -39,7 +40,24 @@ export const create = async (req, res) => {
       phone,
       name,
     });
-    return res.status(200).json({ success: true });
+
+    const _role = 'STAFF';
+    const user = await createUser({ phone, password: phone, role: _role });
+    console.log(user)
+    if (user.code === 405) {
+      return res
+      .status(201)
+      .json({ success: true, ...user });
+    }
+
+    const token = await createToken({
+      _id: user._id,
+      role: user.role,
+    });
+    console.log(token)
+    return res
+      .status(200)
+      .json({ success: true, access_token: token, role: user.role });
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
