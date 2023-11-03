@@ -6,7 +6,7 @@ import config from '../../app.config';
 const router = Router();
 router.get(
   '/all',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.getAll
 );
 
@@ -20,12 +20,12 @@ router.post('/verify', authMiddleware(), controller.verifyOtpAndUpdateRequest);
 
 router.put(
   '/:id/change',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateRequest
 );
 router.put(
   '/:_id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateStatus
 );
 

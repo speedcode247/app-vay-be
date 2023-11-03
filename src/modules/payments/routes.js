@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', authMiddleware(), controller.userGetPayment);
 router.get(
   '/:id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.adminGetPayment
 );
 export default router;

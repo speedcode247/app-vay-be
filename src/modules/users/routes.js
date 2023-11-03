@@ -27,22 +27,22 @@ router.post(
 //
 router.get(
   '/search',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.searchUser
 );
 router.post(
   '/transfer',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.transferZalo
 );
 router.put(
   '/supporter',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateSupporter
 );
 router.post(
   '/export',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.exportUser
 );
 
@@ -85,7 +85,7 @@ router.put(
 
 router.get(
   '/:id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.adminGetAllInfoUser
 );
 router.delete(

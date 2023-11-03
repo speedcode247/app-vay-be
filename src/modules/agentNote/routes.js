@@ -10,6 +10,6 @@ router.get(
   authMiddleware(),
   controller.getAllNote
 );
-router.post('/updateAllNote', authMiddleware([config.app.role[1], config.app.role[2]]), controller.updateAllNote);
+router.post('/updateAllNote', authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]), controller.updateAllNote);
 
 export default router;

@@ -8,23 +8,23 @@ router.get('/all', authMiddleware(), controller.getAll);
 router.get('/', controller.getInfo);
 router.post(
   '/',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.create
 );
 
 router.put(
   '/:_id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateInfo
 );
 router.post(
   '/:_id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.toggle
 );
 router.delete(
   '/:_id',
-  authMiddleware([config.app.role[1], config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.deleteItem
 );
 
