@@ -62,6 +62,7 @@ export const analystOnDay = async () => {
         list_user: item.list_user,
         limit: item.limit,
         _id: item._id,
+        userId: item.userId,
       };
     })
   );

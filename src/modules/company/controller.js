@@ -36,25 +36,26 @@ export const updateInfo = async (req, res) => {
 export const create = async (req, res) => {
   try {
     const { phone, name } = req.body;
-    await Model.create({
-      phone,
-      name,
-    });
-
     const _role = 'STAFF';
     const user = await createUser({ phone, password: phone, role: _role });
-    console.log(user)
+    
     if (user.code === 405) {
       return res
       .status(201)
       .json({ success: true, ...user });
     }
 
+    await Model.create({
+      phone,
+      name,
+      userId: user._id
+    });
+
     const token = await createToken({
       _id: user._id,
       role: user.role,
     });
-    console.log(token)
+    
     return res
       .status(200)
       .json({ success: true, access_token: token, role: user.role });

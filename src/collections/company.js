@@ -24,6 +24,10 @@ const Schema = mongoose.Schema({
     type: Number,
     default: 10000,
   },
+  userId: {
+    type: String,
+    require: false,
+  },
 });
 
 const model = mongoose.model('company', Schema);
