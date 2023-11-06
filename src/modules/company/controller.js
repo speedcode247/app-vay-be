@@ -35,9 +35,13 @@ export const updateInfo = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { phone, name } = req.body;
+    const { phone, name, password } = req.body;
     const _role = 'STAFF';
-    const user = await createUser({ phone, password: phone, role: _role });
+    let _password = phone;
+    if (password) {
+      _password = password;
+    }
+    const user = await createUser({ phone, password: _password, role: _role });
     
     if (user.code === 405) {
       return res
