@@ -30,7 +30,7 @@ export const getProfile = async (req, res) => {
     const data = await service.getProfile(req.user);
     return res.status(200).json({ data });
   } catch (err) {
-    return res.status(400).json({ message: 'Bad request' });
+    return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
 };
 
@@ -39,7 +39,7 @@ export const updateProfile = async (req, res) => {
     await service.updateProfile(req.user, req.body);
     return res.status(200).json({ success: true });
   } catch (err) {
-    return res.status(400).json({ message: 'Bad request' });
+    return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
 };
 
@@ -48,7 +48,7 @@ export const adminUpdateProfile = async (req, res) => {
     await service.updateProfile(req.body.id, req.body.data);
     return res.status(200).json({ success: true });
   } catch (err) {
-    return res.status(400).json({ message: 'Bad request' });
+    return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
 };
 
@@ -58,7 +58,7 @@ export const updateSupporter = async (req, res) => {
     await service.updateProfile(userId, { supporter });
     return res.status(200).json({ success: true });
   } catch (err) {
-    return res.status(400).json({ message: 'Bad request' });
+    return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
 };
 
