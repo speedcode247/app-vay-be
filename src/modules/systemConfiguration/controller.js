@@ -24,7 +24,7 @@ export const adminGetSystemConfig = async (req, res) => {
 
 export const adminUpdateConfig = async (req, res) => {
   try {
-    await service.updateSystemConfig(req.body.data);
+    await service.updateSystemConfig(req.body);
     const data = await service.getSystemConfig();
     return res.status(200).json({ data });
   } catch (err) {
