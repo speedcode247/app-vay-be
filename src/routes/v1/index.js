@@ -8,8 +8,9 @@ import payment from '../../modules/payments/routes';
 import company from '../../modules/company/route';
 import statistics from '../../modules/statistics/routes';
 import upload from '../../modules/upload/router';
+import systemNotification from '../../modules/systemConfiguration/routes';
 import notifications from '../../modules/notifications/routes';
-import systemNotification from ('../../modules/systemConfiguration/routes');
+
 const router = express.Router();
 
 router.use('/auth', auth);
