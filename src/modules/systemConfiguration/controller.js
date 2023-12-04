@@ -15,8 +15,8 @@ export const getSystemConfig = async (req, res) => {
 
 export const adminGetSystemConfig = async (req, res) => {
   try {
-    await service.getSystemConfig();
-    return res.status(200).json({ success: true });
+    const data = await service.getSystemConfig();
+    return res.status(200).json({ data });
   } catch (err) {
     return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
@@ -25,7 +25,8 @@ export const adminGetSystemConfig = async (req, res) => {
 export const adminUpdateConfig = async (req, res) => {
   try {
     await service.updateSystemConfig(req.body.data);
-    return res.status(200).json({ success: true });
+    const data = await service.getSystemConfig();
+    return res.status(200).json({ data });
   } catch (err) {
     return res.status(400).json({ message: 'Phiên đăng nhập hết hạn , vui lòng đăng nhập lại !' });
   }
