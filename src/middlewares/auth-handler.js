@@ -16,8 +16,9 @@ export default function (accepted = [...config.app.role]) {
             message: 'Bạn không có quyền này.',
           });
         }
+        console.log(decoded)
         let currentUser = await userService.getProfile(decoded._id);
-        if (currentUser.password !== decoded.password) {
+        if (decoded.password && currentUser.password !== decoded.password) {
           return res.status(401).json({ message: 'Sai mật khẩu' });
         }
         next();
