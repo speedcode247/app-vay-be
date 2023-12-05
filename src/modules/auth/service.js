@@ -105,5 +105,13 @@ export const signin = async ({ phone, password }) => {
   const isValidPassword = await existedUser.comparePassword(password);
   if (!isValidPassword) throw new Error('Sai mật khẩu');
 
-  return _.pick(existedUser, ['_id', 'role']);
+  return _.pick(existedUser, ['_id', 'role', 'password']);
 };
+
+export const getUserInfo = async (phone) => {
+  const existedUser = await User.findOne({ phone });
+  if (!existedUser) return undefined;
+
+  return _.pick(existedUser, ['_id', 'role', 'password']);
+};
+
