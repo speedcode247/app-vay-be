@@ -16,7 +16,7 @@ const LANGUAGE_LA = {
   WalletMessage4: 'ສະຖານະຄຳຮ້ອງຂໍບໍ່ຖືກຕ້ອງ',
   WalletMessage5: 'ຄຳຮ້ອງຂໍບໍ່ມີຢູ່!',
   WalletMessage6: 'ກະລຸນາຕິດຕໍ່ສະຫນັບສະຫນູນ',
-  WalletMessage7: 'ຜູ້ໃຊ້ບໍ່ໄດ້ຖອນເງິນເຂົ້າ wallet',
+  WalletMessage7: 'ຜູ້ໃຊ້ບໍ່ໄດ້ຖອນເງິນເຂົ້າ',
   };
   module.exports = {
     LANGUAGE_LA,

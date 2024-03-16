@@ -21,9 +21,10 @@ const SYSTEM_LANGUAGE = {
 
 const DEFAULT_LANGUAGE = process.env.SYSTEM_LANGUAGE || 'vi'
 function translate(key, language = DEFAULT_LANGUAGE) {
-  if (Object.values(SYSTEM_LANGUAGE).includes(language)) {
+  if (Object.keys(SYSTEM_LANGUAGE).includes(language.toUpperCase())) {
+    let _languageId = Object.keys(SYSTEM_LANGUAGE).indexOf(language.toUpperCase()) + 1
     let _translateText = '';
-    switch (language) {
+    switch (_languageId) {
       case SYSTEM_LANGUAGE.EN:
         _translateText = LANGUAGE_EN[key];
         break;
