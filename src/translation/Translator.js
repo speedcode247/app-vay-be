@@ -1,6 +1,5 @@
 /* Copyright (c) 2024 Toriti Tech Team https://t.me/ToritiTech */
 require('dotenv').config();
-const { isNotEmptyStringValue } = require('../API/ApiUtils/utilFunctions');
 const { LANGUAGE_CN } = require('./lang_cn');
 const { LANGUAGE_EN } = require('./lang_en');
 const { LANGUAGE_VI } = require('./lang_vi');
@@ -51,7 +50,7 @@ function translate(key, language = DEFAULT_LANGUAGE) {
     }
 
     //Nếu nội dung chưa được định nghĩa hoặc xảy ra sai sót thì sẽ coi như là "chưa dịch"
-    if (isNotEmptyStringValue(_translateText)) {
+    if (_translateText && _translateText !== "") {
       return _translateText;
     }
   }
