@@ -6,12 +6,13 @@ import moment from 'moment';
 import config from '../../app.config';
 import { createContracNumber } from '../../utils/generator';
 import { randomIntByMinMax } from '../../utils/utilFunction';
+import { translate } from '../../translation/Translator';
 
 export const createContract = async ({ userId, payload }) => {
   // check verify
   const current_user = await userServices.getProfile(userId);
   if (!current_user.kyc.status === 'accepted')
-    throw new Error('Bạn chưa hoàn thành xác minh danh tính');
+    throw new Error(translate('AuthenticationMessage3'));
 
   const newContract = await Model.create({
     userId,
@@ -42,7 +43,7 @@ export const confirmContract = async ({ status, contractId, response }) => {
           userId: contract.userId,
           status: true,
           amount: contract.amount,
-          description: 'Hồ sơ vay được chấp thuận.',
+          description: translate('AuthenticationMessage4'),
         },
       });
     }
@@ -67,7 +68,7 @@ export const getAllContracts = async () => {
 export const endContract = async ({ id }) => {
   const current = await Model.findById(id).populate('userId');
   if (current.userId.balance > 0) {
-    throw new Error('Người dùng chưa rút tiền về ví');
+    throw new Error(translate('WalletMessage7'));
   }
   const data = await Model.findByIdAndUpdate(id, { is_done: true });
   return true;

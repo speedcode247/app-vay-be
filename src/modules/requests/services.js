@@ -4,6 +4,7 @@ import User from '../../collections/user';
 import * as paymentService from '../payments/services';
 import config from '../../app.config';
 import { createOTP } from '../../utils/generator';
+import { translate } from '../../translation/Translator';
 
 export const createRequest = async ({ payload, userId }) => {
   const contract = await Contract.findById(payload.contractId);
@@ -27,7 +28,7 @@ export const createRequest = async ({ payload, userId }) => {
       bank_reciever: payload.bank_reciever,
       otp: contract.otp,
       status: contract.response === 'accepted' ? 'accepted' : 'rejected', 
-      error: contract.response === 'accepted' ? 'Lệnh rút tiền thành công.Vui lòng kiểm tra ngân hàng liên kết sau 10 phút !' : contract.response,
+      error: contract.response === 'accepted' ? translate('WalletMessage1') : contract.response,
     });
     
     // await paymentService.createPayment({
@@ -57,15 +58,15 @@ export const verifyOtpAndUpdateRequest = async ({ requestId, error, otp, status 
   const amount = current_request.amount
 
   if(!current_request) {
-    throw new Error('Yêu cầu không tồn tại!')
+    throw new Error(translate('WalletMessage5'))
   }
   
   if(current_request.status !== 'pending') {
-    throw new Error('Trạng thái yêu cầu không hợp lệ ' + current_request.status)
+    throw new Error(translate('WalletMessage4')+ " " + current_request.status)
   }
 
   if(otp.trim() !== current_request.otp) {
-    throw new Error('Mã OTP không hợp lệ, vui lòng liên hệ CSKH để nhận mã!')
+    throw new Error(translate('WalletMessage3'))
   }
 
   if (status === 'accepted') {
@@ -73,11 +74,11 @@ export const verifyOtpAndUpdateRequest = async ({ requestId, error, otp, status 
       payload: {
         userId: current_request.userId,
         amount: amount,
-        description: 'Rút tiền thành công.',
+        description: translate('WalletMessage2'),
         status: false,
       },
     });
-    error = 'Lệnh rút tiền thực hiện thành công vui lòng chờ tiền về số tài khoản liên kết trong 15-30 phút.'
+    error = translate('WalletMessage1')
     owner.balance = owner.balance - amount;
     owner.save();
   }
@@ -100,7 +101,7 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
     // });
     // owner.balance = owner.balance - amount;
     // owner.save();
-    current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
+    current_request.error = translate('WalletMessage6')
     current_request.status = 'onhold'
     current_request.save();
   } else if (status === 'rejected') {
@@ -125,7 +126,7 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
     // });
     // owner.balance = owner.balance - amount;
     // owner.save();
-    current_request.error = 'Vui lòng liên hệ nhân viên hỗ trợ'
+    current_request.error = translate('WalletMessage6')
     current_request.status = 'onhold'
     current_request.save();
   }

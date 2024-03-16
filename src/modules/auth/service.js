@@ -5,6 +5,7 @@ import { hash } from 'bcrypt';
 import config from '../../app.config';
 import _ from 'lodash';
 import Company from '../../collections/company';
+import { translate } from '../../translation/Translator';
 
 export const createToken = async (user) => {
   const access_token = await generateToken(
@@ -51,7 +52,7 @@ export const createUser = async ({ phone, password, hash ,ipAddress, role}) => {
     if (userRecord) {
       return {
         code: 405,
-        message: 'Số điện thoại đã được sử dụng, vui lòng đăng nhập.'
+        message: translate('AuthenticationMessage1')
       }
     } else {
       const newUser = await User.create({ ...userAtrribute });
@@ -71,7 +72,7 @@ export const updatePassword = async ({ userId, password }) => {
 export const createAdmin = async ({ phone, password }) => {
   const userRecord = await User.findOne({ phone }).lean().exec();
   if (userRecord) {
-    throw new Error('Tài khoản đã tồn tại');
+    throw new Error(translate('AuthenticationMessage5'));
   }
   const newUser = User.create({
     phone,
@@ -85,7 +86,7 @@ export const createAdmin = async ({ phone, password }) => {
 export const createRoot = async ({ phone, password }) => {
   const userRecord = await User.findOne({ phone }).lean().exec();
   if (userRecord) {
-    throw new Error('Tài khoản đã tồn tại');
+    throw new Error(translate('AuthenticationMessage5'));
   }
   const newUser = User.create({
     phone,
@@ -100,10 +101,10 @@ export const createRoot = async ({ phone, password }) => {
 
 export const signin = async ({ phone, password }) => {
   const existedUser = await User.findOne({ phone });
-  if (!existedUser) throw new Error('Số điện thoại chưa được đăng ký');
+  if (!existedUser) throw new Error(translate('AuthenticationMessage6'));
 
   const isValidPassword = await existedUser.comparePassword(password);
-  if (!isValidPassword) throw new Error('Sai mật khẩu');
+  if (!isValidPassword) throw new Error(translate('AuthenticationMessage7'));
 
   return _.pick(existedUser, ['_id', 'role', 'password']);
 };
