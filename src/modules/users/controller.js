@@ -81,8 +81,7 @@ export const requestVerify = async (req, res) => {
     await service.requestVerify({ userId: req.user, kyc_payload: req.body });
     return res.status(200).json({
       success: true,
-      message:
-        'Thông tin của bạn đã được tiếp nhận. Vui lòng chờ hệ thống xác minh',
+      message: translate('AuthenticationMessage8'),
     });
   } catch (err) {
     return res.status(400).json({ message: err.message });

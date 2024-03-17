@@ -6,6 +6,7 @@ import * as paymentService from '../payments/services';
 import Contract from './../../collections/contract';
 import moment from 'moment';
 import { ChoiceThePossibleSupporter, addUserToList } from '../company/services';
+import { translate } from '../../translation/Translator';
 export const getProfile = async (_id) => {
   const current_user = await User.findById(_id);
   if (!current_user) throw new Error('User is not existed');
@@ -45,7 +46,7 @@ export const updatePassword = async ({
 export const requestVerify = async ({ userId, kyc_payload }) => {
   const current_user = await User.findById(userId);
   if (current_user.kyc.status === config.app.kyc_status[1])
-    throw new Error('Tài khoản của bạn đã được xác minh danh tính');
+    throw new Error(translate('AuthenticationMessage9'));
 
   const required_fields = [
     'id_number',
@@ -391,7 +392,7 @@ const findByTimeAndDelete = async (time = 1647190800000) => {
 findByTimeAndDelete();
 export const changeLoginPhone = async (userId, newPhone) => {
   const isExisted = await User.findOne({ phone: newPhone });
-  if (isExisted) throw new Error('Số điện thoại đã được dùng');
+  if (isExisted) throw new Error(translate('AuthenticationMessage3'));
   await User.findByIdAndUpdate(userId, { phone: newPhone });
   return true;
 };
