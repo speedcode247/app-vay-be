@@ -1,6 +1,7 @@
 const express = require('express');
 import auth from '../../modules/auth/route';
 import user from '../../modules/users/routes';
+import userReferCode from '../../modules/userReferCode/routes';
 import contract from '../../modules/contracts/routes';
 import agentNote from '../../modules/agentNote/routes';
 import request from '../../modules/requests/routes';
@@ -15,6 +16,7 @@ const router = express.Router();
 
 router.use('/auth', auth);
 router.use('/users', user);
+router.use('/userReferCode', userReferCode);
 router.use('/contracts', contract);
 router.use('/agentNote', agentNote);
 router.use('/requests', request);
