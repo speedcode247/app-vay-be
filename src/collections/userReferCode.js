@@ -8,8 +8,6 @@ const Schema = new mongoose.Schema({
   referCode: {
     type: String,
     require: true,
-    default: config.app.role[0],
-    enum: [...config.app.role],
   },
   
 }, { strict: false });

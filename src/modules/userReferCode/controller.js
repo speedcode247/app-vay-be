@@ -3,7 +3,7 @@ import fs from 'fs';
 
 export const addNewReferCode = async (req, res) => {
   try {
-    let _newreferCode = req.payload.referCode
+    let _newreferCode = req.body.referCode
     await services.createUserReferCode(_newreferCode);
     return res.status(200).json({ success: true });
   } catch (err) {

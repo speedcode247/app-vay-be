@@ -12,7 +12,7 @@ router.get(
 );
 
 router.post(
-  '/:id',
+  '/',
   authMiddleware([config.app.role[2]]),
   controller.addNewReferCode
 );

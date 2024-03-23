@@ -1,6 +1,9 @@
-import Model from '../../collections/contract';
 import UserReferCode from '../../collections/userReferCode';
-
+import _ from 'lodash';
+const options = {
+  lean: true,
+  limit: 10,
+};
 export const getAll = async (filter) => {
   // const arrayMetaTranslated = filter.meta.split(',').map((item) => {
   //   if (item == 1) return undefined;
@@ -25,7 +28,8 @@ export const getAll = async (filter) => {
     },
     { ...options, ...filter, sort: { created_at: -1 } }
   );
-  const tmp = data.docs.map((item) => ({ ...item, ...item.kyc }));
+
+  const tmp = data.docs.map((item) => ({ ...item }));
   data.docs = tmp;
   return { data };
 };
@@ -52,7 +56,7 @@ export const createUserReferCode = async (referCode) => {
       referCode: _newReferCode,
     };
     
-    const _newReferCodeOutput = await userReferCode.create({ ..._newReferCodeData });
+    const _newReferCodeOutput = await UserReferCode.create({ ..._newReferCodeData });
       return _.pick(_newReferCodeOutput, ['_id', 'referCode']);
   } catch (err) {
     throw new Error(err);
