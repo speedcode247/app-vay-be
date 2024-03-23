@@ -34,6 +34,11 @@ export const getAll = async (filter) => {
   return { data };
 };
 
+export const findReferCode = async ({ referCode }) => {
+  let _referCode = await UserReferCode.find({referCode: referCode});
+  return _referCode;
+};
+
 export const deleteReferCode = async ({ referCodeId }) => {
   await UserReferCode.findByIdAndDelete(referCodeId);
   return true;

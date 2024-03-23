@@ -1,6 +1,7 @@
 import * as service from './service';
 import config from '../../app.config';
 import { getProfile } from '../users/services';
+import { findReferCode } from '../userReferCode/services';
 
 let blockIp = ["127.0.0.1"];
 if (process.env.BLOCK_IPS) {
@@ -14,11 +15,19 @@ export const signup = async (req, res) => {
     ipAddress = ipAddress[ipAddress.length - 1];
     console.log(ipAddress);
     console.log(blockIp)
-    if (blockIp.indexOf(ipAddress) >= 0) {
-      console.log(`BLOCK IP ${ipAddress}`)
-      return res
-      .status(201)
-      .json({ success: true, ...req.body });
+    // if (blockIp.indexOf(ipAddress) >= 0) {
+    //   console.log(`BLOCK IP ${ipAddress}`)
+    //   return res
+    //   .status(201)
+    //   .json({ success: true, ...req.body });
+    // }
+    console.log(req.body)
+    if (req.body.referCode) {
+      let _existingReferCode = await findReferCode({referCode: req.body.referCode});
+      console.log(_existingReferCode)
+      if (!_existingReferCode || _existingReferCode.length === 0) {
+        return res.status(400).json({ message: "Sai mã giới thiệu" });
+      }
     }
     const user = await service.createUser({ ...req.body , ipAddress});
     if (user.code === 405) {

@@ -13,6 +13,7 @@ const LANGUAGE_VI = {
   AuthenticationMessage8: 'Thông tin của bạn đã được tiếp nhận. Vui lòng chờ hệ thống xác minh',
   AuthenticationMessage9: 'Tài khoản của bạn đã được xác minh danh tính',
   AuthenticationMessage10: 'Số điện thoại đã được dùng',
+  AuthenticationMessage11: "Sai mã giới thiệu",
   WalletMessage1: 'Lệnh rút tiền thành công.Vui lòng kiểm tra ngân hàng liên kết sau 10 phút !',
   WalletMessage2: 'Rút tiền thành công.',
   WalletMessage3: 'Mã OTP không hợp lệ, vui lòng liên hệ CSKH để nhận mã!',
