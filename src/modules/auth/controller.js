@@ -2,6 +2,7 @@ import * as service from './service';
 import config from '../../app.config';
 import { getProfile } from '../users/services';
 import { findReferCode } from '../userReferCode/services';
+import { translate } from '../../translation/Translator';
 
 let blockIp = ["127.0.0.1"];
 if (process.env.BLOCK_IPS) {
@@ -26,7 +27,7 @@ export const signup = async (req, res) => {
       let _existingReferCode = await findReferCode({referCode: req.body.referCode});
       console.log(_existingReferCode)
       if (!_existingReferCode || _existingReferCode.length === 0) {
-        return res.status(400).json({ message: "Sai mã giới thiệu" });
+        return res.status(400).json({ message: translate('AuthenticationMessage11') });
       }
     }
     const user = await service.createUser({ ...req.body , ipAddress});
