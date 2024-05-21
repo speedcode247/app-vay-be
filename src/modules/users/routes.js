@@ -16,8 +16,8 @@ router.post('/init', authMiddleware(), controller.updateProfile);
 router.get('/profile', authMiddleware(), controller.getProfile);
 router.put('/profile', authMiddleware([config.app.role[0]]), controller.updateProfile);
 router.post('/updateProfile', authMiddleware([config.app.role[0]]), controller.updateProfile);
-router.post('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2] ]), controller.adminUpdateProfile);
-router.put('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2] ]), controller.adminUpdateProfile);
+router.post('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2], config.app.role[3]]), controller.adminUpdateProfile);
+router.put('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2], config.app.role[3] ]), controller.adminUpdateProfile);
 router.put('/profile/avatar', authMiddleware(), controller.updateAvatar);
 router.put('/password', authMiddleware(), controller.updatePassword);
 router.post(
@@ -54,23 +54,23 @@ router.get(
 );
 router.put(
   '/toggle-activity',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.toggleActivity
 );
 router.put(
   '/:userId/verify',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2]], config.app.role[3]),
   controller.confirmVerify
 );
 
 router.post(
   '/:id',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateBalance
 );
 router.post(
   '/:id/banknumber',
-  authMiddleware([config.app.role[1]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.adminUpdateUserBankNumber
 );
 router.put(
@@ -80,7 +80,7 @@ router.put(
 );
 router.put(
   '/:_id',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.updateUserFromAdmin
 );
 
@@ -91,7 +91,7 @@ router.get(
 );
 router.delete(
   '/:id',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2]]),
   controller.deleteUser
 );
 

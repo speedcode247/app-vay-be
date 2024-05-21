@@ -13,13 +13,13 @@ router.get(
 
 router.post(
   '/',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.addNewReferCode
 );
 
 router.delete(
   '/:id',
-  authMiddleware([config.app.role[2]]),
+  authMiddleware([config.app.role[1], config.app.role[2], config.app.role[3]]),
   controller.removeReferCode
 );
 export default router;
