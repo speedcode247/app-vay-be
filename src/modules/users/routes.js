@@ -14,7 +14,7 @@ router.get(
 );
 router.post('/init', authMiddleware(), controller.updateProfile);
 router.get('/profile', authMiddleware(), controller.getProfile);
-router.put('/profile', authMiddleware([config.app.role[0]]), controller.updateProfile);
+router.put('/profile', authMiddleware([config.app.role[0]],config.app.role[1],config.app.role[2], config.app.role[3]), controller.updateProfile);
 router.post('/updateProfile', authMiddleware([config.app.role[0]]), controller.updateProfile);
 router.post('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2], config.app.role[3]]), controller.adminUpdateProfile);
 router.put('/admin/updateProfile', authMiddleware([config.app.role[1],config.app.role[2], config.app.role[3] ]), controller.adminUpdateProfile);
