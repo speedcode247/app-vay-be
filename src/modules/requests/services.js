@@ -8,7 +8,7 @@ import { translate } from '../../translation/Translator';
 
 export const createRequest = async ({ payload, userId }) => {
   const contract = await Contract.findById(payload.contractId);
-  if(!contract.otp) {
+  if (!contract.otp) {
     contract.otp = createOTP()
     await contract.save()
   }
@@ -27,20 +27,20 @@ export const createRequest = async ({ payload, userId }) => {
       contractId: contract._id,
       bank_reciever: payload.bank_reciever,
       otp: contract.otp,
-      status: contract.response === 'accepted' ? 'accepted' : 'rejected', 
+      status: "pending",
       error: contract.response === 'accepted' ? translate('WalletMessage1') : contract.response,
     });
-    
-    // await paymentService.createPayment({
-    //   payload: {
-    //     userId: userId,
-    //     amount: payload.amount,
-    //     description: 'Rút tiền thành công.',
-    //     status: false,
-    //   },
-    // });
-    // owner.balance = owner.balance - payload.amount;
-    // await owner.save();
+
+    await paymentService.createPayment({
+      payload: {
+        userId: userId,
+        amount: payload.amount,
+        description: 'Rút tiền thành công.',
+        status: false,
+      },
+    });
+    owner.balance = owner.balance - payload.amount;
+    await owner.save();
   }
 
   return contract;
@@ -57,15 +57,15 @@ export const verifyOtpAndUpdateRequest = async ({ requestId, error, otp, status 
   const contract = await Contract.findById(current_request.contractId)
   const amount = current_request.amount
 
-  if(!current_request) {
+  if (!current_request) {
     throw new Error(translate('WalletMessage5'))
   }
-  
-  if(current_request.status !== 'pending') {
-    throw new Error(translate('WalletMessage4')+ " " + current_request.status)
+
+  if (current_request.status !== 'pending') {
+    throw new Error(translate('WalletMessage4') + " " + current_request.status)
   }
 
-  if(otp.trim() !== current_request.otp) {
+  if (otp.trim() !== current_request.otp) {
     throw new Error(translate('WalletMessage3'))
   }
 
@@ -113,8 +113,8 @@ export const updateStatus = async ({ requestId, status, error, amount }) => {
     //     status: false,
     //   },
     // });
-    // owner.balance = owner.balance - amount;
-    // owner.save();
+    owner.balance = owner.balance - amount;
+    owner.save();
   } else if (status === 'onhold') {
     // await paymentService.createPayment({
     //   payload: {

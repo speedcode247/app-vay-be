@@ -1,9 +1,10 @@
 import { Router } from 'express';
-const fileUploader = require('../../cloudinary.config');
+
 import upload from './controller';
 import middleware from '../../middlewares/auth-handler';
+import uploadCloud from '../../cloudinary.config';
 const router = Router();
 
-router.post('/', middleware(), fileUploader.single('file'), upload);
+router.post('/', middleware(), uploadCloud, upload);
 
 export default router;

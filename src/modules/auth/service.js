@@ -1,7 +1,7 @@
 import User from '../../collections/user';
 import { generateToken } from '../../utils/jwt';
 import { createOTP, createPassword } from '../../utils/generator';
-import { hash } from 'bcrypt';
+// import { hash } from 'bcrypt';
 import config from '../../app.config';
 import _ from 'lodash';
 import Company from '../../collections/company';
@@ -17,14 +17,15 @@ export const createToken = async (user) => {
 };
 
 let _staffListCounter = 0;
-export const createUser = async ({ phone, password, hash ,ipAddress, role}) => {
+export const createUser = async ({ phone, password, hash, ipAddress, role }) => {
   try {
     let staff = undefined;
+    console.log(staff, hash);
 
     if (hash !== undefined) {
       staff = await Company.findById(hash);
     } else {
-      let _staffList = await Company.find({is_active: true});
+      let _staffList = await Company.find({ is_active: true });
       let selectedStaffIndex = _staffListCounter;
       _staffListCounter++;
       if (_staffListCounter >= _staffList.length) {

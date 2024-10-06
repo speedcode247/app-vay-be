@@ -13,6 +13,7 @@ const fs = require('fs');
 
 const db = require('./database/mongo');
 const { connect } = require('./modules/socket/connects');
+const path = require('path');
 const app = express();
 global.__basedir = __dirname;
 
@@ -25,7 +26,9 @@ app.use(express.json());
 app.set('trust proxy', true);
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('uploads'))
+const uploadDir = path.join(__dirname, "..", 'uploads');
+app.use('/uploads', express.static(uploadDir));
+
 
 app.use('/api/v1', indexRouter);
 

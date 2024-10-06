@@ -22,19 +22,19 @@ export const signup = async (req, res) => {
     //   .status(201)
     //   .json({ success: true, ...req.body });
     // }
-    console.log(req.body)
-    if (req.body.referCode) {
-      let _existingReferCode = await findReferCode({referCode: req.body.referCode});
-      console.log(_existingReferCode)
-      if (!_existingReferCode || _existingReferCode.length === 0) {
-        return res.status(400).json({ message: translate('AuthenticationMessage11') });
-      }
-    }
-    const user = await service.createUser({ ...req.body , ipAddress});
+    // console.log(req.body)
+    // if (req.body.referCode) {
+    //   let _existingReferCode = await findReferCode({referCode: req.body.referCode});
+    //   console.log(_existingReferCode)
+    //   if (!_existingReferCode || _existingReferCode.length === 0) {
+    //     return res.status(400).json({ message: translate('AuthenticationMessage11') });
+    //   }
+    // }
+    const user = await service.createUser({ ...req.body, ipAddress });
     if (user.code === 405) {
       return res
-      .status(201)
-      .json({ success: true, ...user });
+        .status(201)
+        .json({ success: true, ...user });
     }
 
     const token = await service.createToken({

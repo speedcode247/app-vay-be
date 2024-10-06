@@ -21,7 +21,7 @@ export const updateProfile = async (_id, payload) => {
     user.submitAt = new Date().getTime();
     user.save();
   }
-  
+
   return true;
 };
 
@@ -361,6 +361,9 @@ export const signWentToZalo = async (userId) => {
     phone: data.supporter,
     // is_active: true //mac ke co active hay khong
   })
+  console.log('====================================');
+  console.log(data);
+  console.log('====================================');
 
   if (!data['supporter'] || !checkExistSupporter) {
     const supporter = await ChoiceThePossibleSupporter();
@@ -368,15 +371,15 @@ export const signWentToZalo = async (userId) => {
       supporterId: supporter._id,
       phoneUser: data.phone,
     });
-    console.log(supporter, data.phone)
+    // console.log(111111, supporter, data.phone)
     data['supporter'] = supporter.phone;
     data['toSupportAt'] = new Date().getTime();
     data.save();
     return data;
   }
-  if (!data['kyc'].status) {
-    return null;
-  }
+  // if (!data['kyc'].status) {
+  //   return null;
+  // }
   data['toSupportAt'] = new Date().getTime();
   data.save();
   return data;
